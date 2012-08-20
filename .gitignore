@@ -1,0 +1,4 @@
+*.py.swp
+env/
+*.torrent
+.DS_Store
