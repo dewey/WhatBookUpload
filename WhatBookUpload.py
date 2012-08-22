@@ -18,11 +18,11 @@ payload = {'username':username, 'password':password,'login':'Login', 'keeplogged
 heads = {'Content-type':'application/x-www-form-urlencoded'}
 
 s = requests.session()
-login = s.post('https://ssl.what.cd//login.php', data = payload)
-userIndex = s.get('https://ssl.what.cd/ajax.php?action=index')
+login = s.post('https://what.cd//login.php', data = payload)
+userIndex = s.get('https://what.cd/ajax.php?action=index')
 
 while True:
-	torrent = raw_input(colored('Path to Torrentfile: (enter button to exit)\n', 'yellow'))
+	torrent = raw_input(colored('Path to Torrentfile: (hit the enter button to exit)\n', 'yellow'))
 	if torrent == "":
 		break
 	title = raw_input(colored('Title:\n', 'yellow'))
@@ -37,7 +37,7 @@ while True:
 	# Build Post Request
 	files = {'file_input': (torrent, open(torrent, 'rb'))}
 	formData = {'submit':'true', 'type': '2', 'title': title, 'tags': tags, 'image': image, 'desc': desc, 'auth': userIndex.json["response"]["authkey"]}
-	r = s.post("https://ssl.what.cd/upload.php", data=formData, files=files)
+	r = s.post("https://what.cd/upload.php", data=formData, files=files)
 
 	print(colored('Status:\n', 'yellow'))
 	if "torrents.php" in r.url:
@@ -49,4 +49,4 @@ while True:
 	print "                NEXT UPLOAD                   "
 	print "==============================================\n"
 
-s.get('https://ssl.what.cd/logout.php?auth=' + userIndex.json["response"]["authkey"])
+s.get('https://what.cd/logout.php?auth=' + userIndex.json["response"]["authkey"])
